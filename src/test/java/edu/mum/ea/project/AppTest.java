@@ -1,5 +1,8 @@
 package edu.mum.ea.project;
 
+import java.io.IOException;
+
+import org.junit.Before;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -15,16 +18,25 @@ public class AppTest
      *
      * @param testName name of the test case
      */
+	
     public AppTest( String testName )
     {
         super( testName );
     }
+    @Before
+    public void prepare(){
+    	System.out.println("before...");
+    }
 
     /**
      * @return the suite of tests being tested
+     * @throws IOException 
      */
-    public static Test suite()
+    public static Test suite() throws IOException
     {
+    	System.out.println("tested....");
+    	App main = new App();
+    	main.fillDataBase();
         return new TestSuite( AppTest.class );
     }
 
@@ -33,6 +45,7 @@ public class AppTest
      */
     public void testApp()
     {
-        assertTrue( true );
+        System.out.println("test result");
+    	assertTrue( true );
     }
 }

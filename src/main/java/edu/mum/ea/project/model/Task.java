@@ -1,13 +1,17 @@
 package edu.mum.ea.project.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Task {
@@ -17,89 +21,101 @@ public class Task {
 	private String description;
 	@Enumerated(EnumType.STRING)
 	private Status status;
-	private String resources;
-	private List<OfferServices> offerServices;
-	private List<User> teamMembers;
-	@Column(columnDefinition="LONGBLOB")
-	private byte[] pic;
+	@OneToMany
+	@JoinTable(name="Task_Resources",
+			joinColumns=@JoinColumn(name="task_id"),
+			inverseJoinColumns=@JoinColumn(name="resource_id")
+	)
+	private List<Resource> resources;
+	@OneToMany
+	@JoinTable(name="Task_Volunteers",
+		joinColumns=@JoinColumn(name="task_id"),
+		inverseJoinColumns=@JoinColumn(name="user_id")
+	)
+	private List<User> volunteers;
+	@ManyToOne
+	@JoinColumn(name="projectId")
+	private Project project;
 	
 	public Task(){
 		
 	}
 
-	public Task(String name, String description, Status status, String resources, List<OfferServices> offerServices,
-			List<User> teamMembers) {
+	public Task(String name, String description, Status status) {
+		volunteers = new ArrayList<User>();
 		this.name = name;
 		this.description = description;
 		this.status = status;
-		this.resources = resources;
-		this.offerServices = offerServices;
-		this.teamMembers = teamMembers;
 	}
-
-	public int getTid() {
-		return tid;
-	}
-
-	public void setTid(int tid) {
-		this.tid = tid;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	
+	public void addVolunteer(User volunteer){
+		volunteers.add(volunteer);
 	}
 
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public String getName() {
+		return name;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public List<Resource> getResources() {
+		return resources;
 	}
 
 	public Status getStatus() {
 		return status;
 	}
 
+	public List<User> getTeamMembers() {
+		return volunteers;
+	}
+
+	public int getTid() {
+		return tid;
+	}
+
+	public List<User> getVolunteers() {
+		return volunteers;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public void setResources(List<Resource> resources) {
+		this.resources = resources;
+	}
+
 	public void setStatus(Status status) {
 		this.status = status;
 	}
 
-	public String getResources() {
-		return resources;
-	}
-
-	public void setResources(String resources) {
-		this.resources = resources;
-	}
-
-	public List<OfferServices> getOfferServices() {
-		return offerServices;
-	}
-
-	public void setOfferServices(List<OfferServices> offerServices) {
-		this.offerServices = offerServices;
-	}
-
-	public List<User> getTeamMembers() {
-		return teamMembers;
-	}
-
 	public void setTeamMembers(List<User> teamMembers) {
-		this.teamMembers = teamMembers;
+		this.volunteers = teamMembers;
 	}
 
-	public byte[] getPic() {
-		return pic;
+	public void setTid(int tid) {
+		this.tid = tid;
 	}
 
-	public void setPic(byte[] pic) {
-		this.pic = pic;
+	public void setVolunteers(List<User> volunteers) {
+		this.volunteers = volunteers;
 	}
-	
-	
+
+
+		
 }

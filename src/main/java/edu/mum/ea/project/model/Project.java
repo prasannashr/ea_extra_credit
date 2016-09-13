@@ -9,6 +9,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,87 +29,124 @@ public class Project {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	@Enumerated(EnumType.STRING)
-	private List<Benefits> beneficiaries;
+	@OneToMany
+	@JoinTable(name="Task_Beneficiaries",
+		joinColumns=@JoinColumn(name="task_id"),
+		inverseJoinColumns=@JoinColumn(name="beneficiaries_id")
+	)
+	private List<Beneficiaries> beneficiaries;
 	@Column(columnDefinition="LONGBLOB")
 	private byte[] pic;
-	
+	@ManyToOne
+	private User createdBy;
+	private String location;
+	@OneToMany(mappedBy="project")
+	private List<Task> tasks;
+
 	public Project(){
 		
 	}
-
 	public Project(String name, String description, Date startDate, Date endDate, Status status,
-			List<Benefits> beneficiaries) {
-		
+			List<Beneficiaries> beneficiaries, User createdBy, String location) {
+		super();
 		this.name = name;
 		this.description = description;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.status = status;
 		this.beneficiaries = beneficiaries;
+		this.createdBy = createdBy;
+		this.location = location;
+	}
+	
+	public List<Beneficiaries> getBeneficiaries() {
+		return beneficiaries;
+	}
+	
+	
+	public User getCreatedBy() {
+		return createdBy;
 	}
 
-	public int getPid() {
-		return pid;
-	}
-
-	public void setPid(int pid) {
-		this.pid = pid;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public String getDescription() {
 		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
 	}
 
 	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public String getLocation() {
+		return location;
 	}
 
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
-	public List<Benefits> getBeneficiaries() {
-		return beneficiaries;
-	}
-
-	public void setBeneficiaries(List<Benefits> beneficiaries) {
-		this.beneficiaries = beneficiaries;
+	public String getName() {
+		return name;
 	}
 
 	public byte[] getPic() {
 		return pic;
 	}
 
+	public int getPid() {
+		return pid;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setBeneficiaries(List<Beneficiaries> beneficiaries) {
+		this.beneficiaries = beneficiaries;
+	}
+
+	public void setCreatedBy(User createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public void setPic(byte[] pic) {
 		this.pic = pic;
+	}
+
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
 	}
 	
 	
