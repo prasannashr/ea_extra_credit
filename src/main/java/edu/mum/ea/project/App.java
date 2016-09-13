@@ -153,19 +153,31 @@ public class App {
 				
 				Project project1 = new Project("Project1", "project1 description", new Date(), 
 						new Date(2016, 11, 16), Status.NEW, beneficiaries, admin, "1000 4th st. IA,USA");
+				Project project2 = new Project("Project2", "project2 description", new Date(), 
+						new Date(2016, 10, 26), Status.NEW, beneficiaries, admin, "1200 5th st. CA,USA");
 				Path p = FileSystems.getDefault().getPath("", "project1.png");
 				byte [] fileData = Files.readAllBytes(p);
 				project1.setPic(fileData);
+				project2.setPic(fileData);
 				
 				Task task1 = new Task("Task1","Task 1 desc",Status.NEW);
+				Task task2 = new Task("Task2","Task 2 desc",Status.IN_PROGRESS);
 				
 				List<Resource> resources = new ArrayList<Resource>();
 				resources.add(new Resource("resource1"));
 				resources.add(new Resource("resource2"));
 				resources.add(new Resource("resource3"));
 				
+				List<Resource> resources2 = new ArrayList<Resource>();
+				resources.add(new Resource("resource4"));
+				resources.add(new Resource("resource5"));
+				resources.add(new Resource("resource6"));
+				
 				task1.setResources(resources);
 				task1.setProject(project1);
+				
+				task2.setResources(resources2);
+				task2.setProject(project2);
 				
 			
 			//	2.	Volunteers should be able to offer their services for tasks on projects.
@@ -176,14 +188,21 @@ public class App {
 				task1.addVolunteer(volunteer2);
 				task1.addVolunteer(volunteer3);
 			
+				task2.addVolunteer(volunteer2);
+				task2.addVolunteer(volunteer3);
 			
 				em.persist(admin);
 				em.persist(project1);
+				em.persist(project2);
 				for (Beneficiaries beneficiar : beneficiaries) {
 					em.persist(beneficiar);
 				}
 				em.persist(task1);
+				em.persist(task2);
 				for (Resource resource : resources) {
+					em.persist(resource);
+				}
+				for (Resource resource : resources2) {
 					em.persist(resource);
 				}
 				em.persist(volunteer1);
