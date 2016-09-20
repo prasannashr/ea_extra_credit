@@ -171,7 +171,7 @@ public class AppHibernate {
 				
 			
 			//	2.	Volunteers should be able to offer their services for tasks on projects.
-				User volunteer1 = new User("Shyam",UserType.VOLUNTEER);
+				/*User volunteer1 = new User("Shyam",UserType.VOLUNTEER);
 				User volunteer2 = new User("Hari",UserType.VOLUNTEER);
 				User volunteer3 = new User("Arun",UserType.VOLUNTEER);
 				task1.addVolunteer(volunteer1);
@@ -179,7 +179,7 @@ public class AppHibernate {
 				task1.addVolunteer(volunteer3);
 			
 				task2.addVolunteer(volunteer2);
-				task2.addVolunteer(volunteer3);
+				task2.addVolunteer(volunteer3);*/
 			
 				//session.persist(admin);
 				admin.setProjects(Arrays.asList(project1));

@@ -65,6 +65,11 @@ public class Project {
 		this.location = location;
 	}
 	
+	public void addTask(Task task){
+		task.setProject(this);
+		tasks.add(task);
+	}
+	
 	public List<Beneficiaries> getBeneficiaries() {
 		return beneficiaries;
 	}
