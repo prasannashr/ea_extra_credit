@@ -3,6 +3,7 @@ package edu.mum.ea.project.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,24 +16,31 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Task {
+	
 	@Id @GeneratedValue
 	private int tid;
+	
 	private String name;
+	
 	private String description;
+	
 	@Enumerated(EnumType.STRING)
 	private Status status;
-	@OneToMany
+	
+	@OneToMany(cascade={CascadeType.ALL})
 	@JoinTable(name="Task_Resources",
 			joinColumns=@JoinColumn(name="task_id"),
 			inverseJoinColumns=@JoinColumn(name="resource_id")
 	)
 	private List<Resource> resources;
-	@OneToMany
+	
+	@OneToMany(cascade={CascadeType.ALL})
 	@JoinTable(name="Task_Volunteers",
 		joinColumns=@JoinColumn(name="task_id"),
 		inverseJoinColumns=@JoinColumn(name="user_id")
 	)
 	private List<User> volunteers;
+	
 	@ManyToOne
 	@JoinColumn(name="projectId")
 	private Project project;
@@ -42,14 +50,14 @@ public class Task {
 	}
 
 	public Task(String name, String description, Status status) {
-		volunteers = new ArrayList<User>();
+		//volunteers = new ArrayList<User>();
 		this.name = name;
 		this.description = description;
 		this.status = status;
 	}
 	
 	public void addVolunteer(User volunteer){
-		volunteers.add(volunteer);
+		//volunteers.add(volunteer);
 	}
 
 	public String getDescription() {
@@ -75,15 +83,16 @@ public class Task {
 	public List<User> getTeamMembers() {
 		return volunteers;
 	}
+	public List<User> getVolunteers() {
+		return volunteers;
+	}
+
 
 	public int getTid() {
 		return tid;
 	}
 
-	public List<User> getVolunteers() {
-		return volunteers;
-	}
-
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -104,18 +113,9 @@ public class Task {
 		this.status = status;
 	}
 
-	public void setTeamMembers(List<User> teamMembers) {
-		this.volunteers = teamMembers;
-	}
-
+	
 	public void setTid(int tid) {
 		this.tid = tid;
 	}
 
-	public void setVolunteers(List<User> volunteers) {
-		this.volunteers = volunteers;
-	}
-
-
-		
 }

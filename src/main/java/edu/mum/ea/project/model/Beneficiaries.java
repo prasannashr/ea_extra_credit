@@ -6,16 +6,17 @@ import javax.persistence.Id;
 
 @Entity
 public class Beneficiaries {
+	
 	@Id @GeneratedValue
 	private int bid;
-	private String firstName;
-	private String lastName;
 	
+	private String firstName;
+	
+	private String lastName;	
 	
 	public Beneficiaries(){
 		
 	}
-
 
 	public Beneficiaries(String firstName, String lastName) {
 		super();

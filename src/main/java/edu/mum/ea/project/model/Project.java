@@ -3,6 +3,7 @@ package edu.mum.ea.project.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -29,18 +30,23 @@ public class Project {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	@Enumerated(EnumType.STRING)
-	@OneToMany
-	@JoinTable(name="Task_Beneficiaries",
-		joinColumns=@JoinColumn(name="task_id"),
+	
+	@OneToMany(cascade={CascadeType.ALL})
+	@JoinTable(name="project_Beneficiaries",
+		joinColumns=@JoinColumn(name="p_id"),
 		inverseJoinColumns=@JoinColumn(name="beneficiaries_id")
 	)
 	private List<Beneficiaries> beneficiaries;
+	
 	@Column(columnDefinition="LONGBLOB")
 	private byte[] pic;
-	@ManyToOne
+	
+	@ManyToOne(cascade={CascadeType.ALL})
 	private User createdBy;
+	
 	private String location;
-	@OneToMany(mappedBy="project")
+	
+	@OneToMany(mappedBy="project",cascade={CascadeType.ALL})
 	private List<Task> tasks;
 
 	public Project(){

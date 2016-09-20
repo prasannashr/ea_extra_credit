@@ -1,0 +1,9 @@
+edu\mum\ea\project\AppHibernate.class
+edu\mum\ea\project\model\User.class
+edu\mum\ea\project\App.class
+edu\mum\ea\project\model\Project.class
+edu\mum\ea\project\model\Status.class
+edu\mum\ea\project\model\Beneficiaries.class
+edu\mum\ea\project\model\UserType.class
+edu\mum\ea\project\model\Resource.class
+edu\mum\ea\project\model\Task.class

@@ -6,8 +6,10 @@ import javax.persistence.Id;
 
 @Entity
 public class Resource {
+	
 	@Id @GeneratedValue
 	private int rid;
+	
 	private String name;
 	
 	public Resource(){

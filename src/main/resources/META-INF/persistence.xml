@@ -4,20 +4,20 @@
 	version="2.0">
 	<persistence-unit name="cs544">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>edu.mum.ea.model.Beneficiaries</class>
-		<class>edu.mum.ea.model.Project</class>
-		<class>edu.mum.ea.model.Resource</class>
-		<class>edu.mum.ea.model.Task</class>
-		<class>edu.mum.ea.model.User</class>
+		<class>edu.mum.ea.project.model.Beneficiaries</class>
+		<class>edu.mum.ea.project.model.Project</class>
+		<class>edu.mum.ea.project.model.Resource</class>
+		<class>edu.mum.ea.project.model.Task</class>
+		<class>edu.mum.ea.project.model.User</class>
 		
 
 		<properties>
 			<property name="hibernate.connection.driver_class" value="org.gjt.mm.mysql.Driver" />
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost/volunteerproject" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost/extracredit?createDatabaseIfNotExist=true" />
 			<property name="hibernate.connection.username" value="root" />
 			<property name="hibernate.connection.password" value="root" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 			<property name="hibernate.show_sql" value="false" />
 			<property name="use_sql_comments" value="true" />
 			<property name="hibernate.format_sql" value="true" />
